@@ -24,7 +24,9 @@ module BlacklightHighlight::TemplateHelper
   end
 
   def render_highlight_field_value args
-     args[:document].highlight(args[:field].gsub(/_highlight$/, '')) 
+     value = args[:document].highlight(args[:field].gsub(/_highlight$/, ''))
+     
+     raw(value)
   end
 
 end

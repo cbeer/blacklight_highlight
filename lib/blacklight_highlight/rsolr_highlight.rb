@@ -1,7 +1,7 @@
 module BlacklightHighlight::RsolrHighlight
   module InstanceMethods
-    def highlight key 
-      highlights[key]
+    def highlight field 
+      highlights[field]
     end
 
     def highlights 
@@ -10,6 +10,11 @@ module BlacklightHighlight::RsolrHighlight
       val = solr_response['highlighting'][self.id]
 
       val
+    end
+
+    def has? field
+      return true if solr_response['highlighting'][self.id][field]
+      super(field)
     end
   end
 end

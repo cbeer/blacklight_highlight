@@ -31,10 +31,7 @@ git clone git://github.com/cbeer/blacklight_highlight.git
 
 You should configure solr to provide highlighting results (see <http://wiki.apache.org/solr/HighlightingParameters>). However, this plugin will attempt to do some basic configuration automatically by overriding SolrHelper#solr_search_parameters. You can inject solr configuration into Blacklight using config[:highlight] to specify Solr highlighting parameters.
 
-To add highlighted fields to an application, you may either:
-
-  * add the suffix "_highlight" to the index or show field configuration
-  * set config[:index_fields][:highlight] to an array of field names you wish to enable highlighting for.
+To add highlighted fields to an application, set config[:index_fields][:highlight] to an array field names for which you wish to enable highlighting.
 
 == Injection
 

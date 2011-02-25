@@ -1,0 +1,63 @@
+BlacklightHighlight: Blacklight plugin that exposes Solr's highlight field component
+
+= Description
+
+The BlacklightHighlight Field plugin provides basic support for the Solr Highlight component, which provides search term highlighting in text fields.MoreLikeThis feature, which provides similar documents for a results set. The primary use case for this plugin is from the index view, but may be repurposed on the document show view as well.
+
+
+= Requirements
+
+A Rails app using the Blacklight plugin (tested against post-version 2.6).
+
+= Installation
+
+This is a plugin, not a gem (because the structure was copied from existing plugins; in theory, it should be possible to make this a gem in the future).
+
+ A couple different ways to get the source into your vendor/plugins directory. 
+
+Go into your application directory, and run: 
+
+./script/plugin install git://github.com/cbeer/blacklight_highlight.git
+
+Later you can run ./script/plugin update blacklight_highlight if you like. 
+
+Requires git installed on your system. There are other ways to get the plugin in there too.
+
+OR
+cd $your_app/vendor/plugins
+git clone git://github.com/cbeer/blacklight_highlight.git 
+
+= Configuration
+
+You should configure solr to provide highlighting results (see <http://wiki.apache.org/solr/HighlightingParameters>). However, this plugin will attempt to do some basic configuration automatically by overriding SolrHelper#solr_search_parameters. You can inject solr configuration into Blacklight using config[:highlight] to specify Solr highlighting parameters.
+
+To add highlighted fields to an application, you may either:
+
+  * add the suffix "_highlight" to the index or show field configuration
+  * set config[:index_fields][:highlight] to an array of field names you wish to enable highlighting for.
+
+== Injection
+
+This plugin assumes it is in a Blacklight Rails app, uses Blacklight methods, Rails methods, and standard ruby module includes to inject it's behaviors into the app.  
+
+You can turn off this injection if you like, although it will make the plugin less (or non-) functional unless you manually do similar injection. See lib/blacklight_highlight.rb#inject! to see exactly what's going on. 
+
+In any initializer, you can set:
+
+  BlacklightHighlightField.omit_inject = true
+
+to turn off all injection. The plugin will be completely non-functional if you do this, of course. But perhaps you could try to re-use some of it's classes in a non-Blacklight, highly hacked Blacklight, or even non-Rails application this way. 
+
+You can also turn off injection of individual components, which could be more useful:
+   
+  BlacklightHighlightField.omit_inject = {
+    :rsolr_plugin => false,
+    :view_helpers => false,
+    :controller_mixin => false
+  }
+
+= Tests
+
+There are none. This is bad I know, sorry. 
+
+

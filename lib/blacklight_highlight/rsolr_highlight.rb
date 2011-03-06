@@ -13,7 +13,7 @@ module BlacklightHighlight::RsolrHighlight
     end
 
     def has? field
-      return true if solr_response['highlighting'][self.id][field]
+      return true if solr_response['highlighting'] and solr_response['highlighting'][self.id] and solr_response['highlighting'][self.id][field]
       super(field)
     end
   end

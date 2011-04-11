@@ -21,7 +21,7 @@ module BlacklightHighlight::TemplateHelper
   def render_highlight_field_value args
      value = args[:document].highlight(args[:field])
      
-     raw(value) unless value.blank?
+     raw(value) # unless value.blank?
   end
 
 end

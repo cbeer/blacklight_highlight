@@ -9,10 +9,9 @@ module BlacklightHighlight
   def self.omit_inject ; @omit_inject ; end
   
   def self.inject!
-    Dispatcher.to_prepare do
       unless omit_inject[:view_helpers]
         CatalogController.send(:include, BlacklightHighlight::SolrHelperOverride) unless CatalogController.include?(BlacklightHighlight::SolrHelperOverride)
-        CatalogController.add_template_helper(BlacklightHighlight::TemplateHelper) unless CatalogController.master_helper_module.include?(BlacklightHighlight::TemplateHelper)
+        CatalogController.helper(BlacklightHighlight::TemplateHelper) unless CatalogController._helpers.include?(BlacklightHighlight::TemplateHelper)
       end
 
       unless omit_inject[:controller_mixin]
@@ -22,8 +21,6 @@ module BlacklightHighlight
       unless omit_inject[:rsolr_plugin]
         SolrDocument.plugin(BlacklightHighlight::RsolrHighlight) unless SolrDocument.plugins.include?(BlacklightHighlight::RsolrHighlight)
       end
-
-    end
   end
 
   # Add element to array only if it's not already there

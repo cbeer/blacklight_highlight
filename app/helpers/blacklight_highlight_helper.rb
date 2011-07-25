@@ -1,5 +1,5 @@
 # Meant to be applied on top of Blacklight helpers
-module BlacklightHighlight::TemplateHelper
+module BlacklightHighlightHelper
 
   def render_index_field_value args
     if args[:field] and Blacklight.config[:index_fields][:highlight] and Blacklight.config[:index_fields][:highlight].include?(args[:field])

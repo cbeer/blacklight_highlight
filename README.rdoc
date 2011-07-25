@@ -2,56 +2,37 @@ BlacklightHighlight: Blacklight plugin that exposes Solr's highlight field compo
 
 = Description
 
-The BlacklightHighlight Field plugin provides basic support for the Solr Highlight component, which provides search term highlighting in text fields.MoreLikeThis feature, which provides similar documents for a results set. The primary use case for this plugin is from the index view, but may be repurposed on the document show view as well.
+The BlacklightHighlight Field plugin provides basic support for the Solr Highlight component, which provides search term highlighting in text fields.
 
+This plugin will _replace_ the document field response with the highlighter field (if present). This means that if, for example, you have the field 'description_t' in your Blacklight.config[:index_fields], if 'description_t' is a 'highlighted' field, the result of SolrDocument#get('description_t') *will be* the highlighted version of this feel.
+
+Future versions of this plugin may allow you to selectively request highlighted fields. 
 
 = Requirements
 
-A Rails app using the Blacklight plugin (tested against post-version 2.6).
+A Rails app using Blacklight >3.x.
 
 = Installation
 
-This is a plugin, not a gem (because the structure was copied from existing plugins; in theory, it should be possible to make this a gem in the future).
+Add
 
- A couple different ways to get the source into your vendor/plugins directory. 
+    gem "blacklight_highlight"
 
-Go into your application directory, and run: 
+to your Gemfile and run "bundle install".
 
-./script/plugin install git://github.com/cbeer/blacklight_highlight.git
+Then run "rails generate blacklight_highlight" to install the appropriate extensions into your CatalogController and SolrDocument classes. In you want to do customize the way this installs, instead you may:
 
-Later you can run ./script/plugin update blacklight_highlight if you like. 
+- add this to your Solr Document model:
+    
+    use_extension(BlacklightOaiProvider::SolrDocumentExtension)
 
-Requires git installed on your system. There are other ways to get the plugin in there too.
+- add this to your Controler:
 
-OR
-cd $your_app/vendor/plugins
-git clone git://github.com/cbeer/blacklight_highlight.git 
 
 = Configuration
 
-You should configure solr to provide highlighting results (see <http://wiki.apache.org/solr/HighlightingParameters>). However, this plugin will attempt to do some basic configuration automatically by overriding SolrHelper#solr_search_parameters. You can inject solr configuration into Blacklight using config[:highlight] to specify Solr highlighting parameters.
+You should configure your Solr request handlers to provide the appropriate highlighting results (see <http://wiki.apache.org/solr/HighlightingParameters>). If you do not add any fields, the Solr default will be used (" the fields highlighted for the LuceneQParser are the defaultSearchField (or the df param if used) and for the DisMax parser the qf fields are used."). 
 
-To add highlighted fields to an application, set config[:index_fields][:highlight] to an array field names for which you wish to enable highlighting.
-
-== Injection
-
-This plugin assumes it is in a Blacklight Rails app, uses Blacklight methods, Rails methods, and standard ruby module includes to inject it's behaviors into the app.  
-
-You can turn off this injection if you like, although it will make the plugin less (or non-) functional unless you manually do similar injection. See lib/blacklight_highlight.rb#inject! to see exactly what's going on. 
-
-In any initializer, you can set:
-
-  BlacklightHighlightField.omit_inject = true
-
-to turn off all injection. The plugin will be completely non-functional if you do this, of course. But perhaps you could try to re-use some of it's classes in a non-Blacklight, highly hacked Blacklight, or even non-Rails application this way. 
-
-You can also turn off injection of individual components, which could be more useful:
-   
-  BlacklightHighlightField.omit_inject = {
-    :rsolr_plugin => false,
-    :view_helpers => false,
-    :controller_mixin => false
-  }
 
 = Tests
 

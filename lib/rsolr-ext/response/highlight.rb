@@ -2,21 +2,19 @@ module RSolr
   module Ext
     module Response
       module Highlight
-        def highlight field 
-          highlights[field]
+        def highlight document, field = nil
+          doc_highlights = highlights[document.id]
+          doc_highlights ||= {}
+
+          return doc_highlights[field] if field
+
+          doc_highlights
         end
     
         def highlights 
-          return {} unless solr_response and solr_response['highlighting'] and solr_response['highlighting'][self.id]
+          return {} unless self.respond_to?(:response) and self.response[:highlighting] 
     
-          val = solr_response['highlighting'][self.id]
-    
-          val
-        end
-    
-        def has? field
-          return true if solr_response['highlighting'] and solr_response['highlighting'][self.id] and solr_response['highlighting'][self.id][field]
-          super(field)
+          @highlights ||= self.response[:highlighting]
         end
       end
     end

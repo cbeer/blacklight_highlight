@@ -10,7 +10,7 @@ class BlacklightHighlightGenerator < Rails::Generators::Base
 
     if File.exists? file_path
       inject_into_file file_path, :after => "include Blacklight::Solr::Document" do
-        "\n  include SolrDocument.use_extension( BlacklightHighlight::SolrDocumentExtension )\n"
+        "\n  include BlacklightHighlight::SolrDocumentExtension\n"
       end
     end
   end

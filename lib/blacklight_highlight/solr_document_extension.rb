@@ -14,6 +14,8 @@ module BlacklightHighlight
 
     def highlight key=nil
       return unless solr_response and solr_response.respond_to? :highlight
+      return if key == self.class.unique_key
+
       solr_response.highlight(self, key)
     end
   end

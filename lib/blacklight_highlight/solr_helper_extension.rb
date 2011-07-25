@@ -1,5 +1,5 @@
 # Meant to be applied on top of Blacklight helpers
-module BlacklightHighlight::SolrHelperOverride
+module BlacklightHighlight::SolrHelperExtension
   def self.included some_class
     some_class.solr_search_params_logic += [:solr_highlight_params]
   end

@@ -12,9 +12,9 @@ module RSolr
         end
     
         def highlights 
-          return {} unless self.respond_to?(:response) and self.response[:highlighting] 
+          return {} unless self[:highlighting] 
     
-          @highlights ||= self.response[:highlighting]
+          @highlights ||= self[:highlighting]
         end
       end
     end

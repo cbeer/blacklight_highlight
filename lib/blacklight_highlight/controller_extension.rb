@@ -4,6 +4,7 @@ module BlacklightHighlight::ControllerExtension
   def self.included(some_class)
     some_class.helper_method :highlight_config
     some_class.helper BlacklightHighlightHelper
+    some_class.send(:include, BlacklightHighlight::SolrHelperExtension)
   end
 
   # Uses Blacklight.config, needs to be modified when

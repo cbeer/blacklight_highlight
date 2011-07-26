@@ -7,16 +7,29 @@ module BlacklightHighlight
     end
 
     def [] key
-      return highlight(key) unless highlight(key).blank?
+      return super(key) if key == self.class.unique_key
+      return highlight(key) if highlight_fields.key?(key) and not highlight(key).blank?
 
       super(key)
     end
 
-    def highlight key=nil
-      return unless solr_response and solr_response.respond_to? :highlight
-      return if key == self.class.unique_key
+    def key? key
+      return super(key) if key == self.class.unique_key
+      return true if highlight_fields.key?(key)
+    
+      super(key)
+    end
 
-      solr_response.highlight(self, key)
+    def highlight key = nil
+      return if key == self.class.unique_key
+      highlight_fields[key]
+    end
+
+    def highlight_fields
+      @highlight_fields ||= begin
+        return {} unless solr_response and solr_response.respond_to? :highlight
+        solr_response.highlight(self)
+      end
     end
   end
 end

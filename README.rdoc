@@ -24,9 +24,11 @@ Then run "rails generate blacklight_highlight" to install the appropriate extens
 
 - add this to your Solr Document model:
     
-    use_extension(BlacklightOaiProvider::SolrDocumentExtension)
+    include BlacklightHighlight::SolrDocumentExtension
 
-- add this to your Controler:
+- add this to your Controller:
+
+    include BlacklightHighlight::ControllerExtension
 
 
 = Configuration

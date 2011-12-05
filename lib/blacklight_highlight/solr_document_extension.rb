@@ -22,7 +22,7 @@ module BlacklightHighlight
 
     def highlight key = nil
       return if key == self.class.unique_key
-      highlight_fields[key]
+      highlight_fields[key].map { |x| x.html_safe }
     end
 
     def highlight_fields

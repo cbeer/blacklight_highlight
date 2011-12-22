@@ -5,7 +5,12 @@ module BlacklightHighlight::SolrHelperExtension
   end
 
   def solr_highlight_params solr_parameters, user_parameters
-    solr_parameters[:hl] ||= true
+
+    if solr_parameters['q'] || solr_parameters['hl.q'] || solr_parameters[:q] || solr_parameters[:'hl.q']
+      solr_parameters[:hl] ||= true
+      solr_parameters[:'hl.fl'] ||= ''
+      solr_parameters[:'hl.fl'] += blacklight_config.index_fields.select { |key, config| config.highlight }.map { |key, config| config.field }.join(",")
+    end
   end
 end
 

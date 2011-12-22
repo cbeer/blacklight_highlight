@@ -21,5 +21,6 @@ describe 'Blacklight highlighting' do
 
     page.should_not have_content 'Lorem ipsum'
     page.should have_content 'lorem et lorem'
+    page.should_not have_content '<em>lorem</em>'
   end
 end

@@ -4,13 +4,11 @@ BlacklightHighlight: Blacklight plugin that exposes Solr's highlight field compo
 
 The BlacklightHighlight Field plugin provides basic support for the Solr Highlight component, which provides search term highlighting in text fields.
 
-This plugin will _replace_ the document field response with the highlighter field (if present). This means that if, for example, you have the field 'description_t' in your Blacklight.config[:index_fields], if 'description_t' is a 'highlighted' field, the result of SolrDocument#get('description_t') *will be* the highlighted version of this feel.
-
-Future versions of this plugin may allow you to selectively request highlighted fields. 
+This plugin overrides low-level methods from RSolr::Doc to provide easy access to the highlighting results. This means, however, that if you have a highlighted field, it may be difficult to access the un-highlighted version directly. It also provides a very basic configuration out-of-the-box, with the expectation that you will configure Solr to provide better highlighting results.
 
 = Requirements
 
-A Rails app using Blacklight >3.x.
+A Rails app using Blacklight >=3.2.
 
 = Installation
 
@@ -35,9 +33,6 @@ Then run "rails generate blacklight_highlight" to install the appropriate extens
 
 You should configure your Solr request handlers to provide the appropriate highlighting results (see <http://wiki.apache.org/solr/HighlightingParameters>). If you do not add any fields, the Solr default will be used (" the fields highlighted for the LuceneQParser are the defaultSearchField (or the df param if used) and for the DisMax parser the qf fields are used."). 
 
-
 = Tests
 
-There are none. This is bad I know, sorry. 
-
-
+Run `rspec`.

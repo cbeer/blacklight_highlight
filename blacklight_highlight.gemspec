@@ -22,4 +22,11 @@ Gem::Specification.new do |s|
   s.add_dependency "blacklight"
   s.add_dependency "rsolr"
   s.add_dependency "rsolr-ext"
+
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "capybara"
+  s.add_development_dependency "sqlite3"
+  s.add_development_dependency "vcr"
+  s.add_development_dependency 'fakeweb'
 end

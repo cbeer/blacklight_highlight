@@ -2,7 +2,7 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: http://127.0.0.1:8983/solr/select?wt=ruby&rows=10&hl=true
+    uri: http://127.0.0.1:8983/solr/select?wt=ruby&rows=10
     body: 
     headers: 
   response: !ruby/struct:VCR::Response
@@ -126,7 +126,7 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: http://127.0.0.1:8983/solr/select?wt=ruby&q=ipsum+lorem&spellcheck.q=ipsum+lorem&rows=10&hl=true
+    uri: http://127.0.0.1:8983/solr/select?wt=ruby&q=ipsum+lorem&spellcheck.q=ipsum+lorem&rows=10&hl=true&hl.fl=highlight_field
     body: 
     headers: 
   response: !ruby/struct:VCR::Response

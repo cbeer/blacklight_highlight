@@ -25,7 +25,6 @@ require 'vcr'
 VCR.config do |config|
   config.stub_with :fakeweb
   config.cassette_library_dir = 'spec/vcr_cassettes'
-  config.default_cassette_options = { :record => :new_episodes }
 end
 
 require 'rspec/rails'

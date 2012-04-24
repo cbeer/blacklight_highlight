@@ -1,25 +1,11 @@
 PATH
   remote: .
   specs:
-    blacklight_highlight (0.0.2)
-      blacklight
+    blacklight_highlight (0.1.0)
+      blacklight (~> 3.2)
       rails (~> 3.0)
       rsolr
       rsolr-ext
-
-PATH
-  remote: ../blacklight
-  specs:
-    blacklight (3.2.0pre2)
-      compass (>= 0.12.alpha.2)
-      kaminari
-      marc (~> 0.4.3)
-      nokogiri (~> 1.5)
-      rails (~> 3.1.1)
-      rsolr (~> 1.0.6)
-      rsolr-ext (~> 1.0.3)
-      sass-rails (~> 3.1.1)
-      unicode
 
 GEM
   remote: http://rubygems.org/
@@ -53,6 +39,17 @@ GEM
     activesupport (3.1.3)
       multi_json (~> 1.0)
     arel (2.2.1)
+    blacklight (3.3.2)
+      compass-rails (~> 1.0.0)
+      compass-susy-plugin (>= 0.9.0)
+      kaminari
+      marc (~> 0.4.3)
+      nokogiri (~> 1.5)
+      rails (~> 3.1)
+      rsolr (~> 1.0.6)
+      rsolr-ext (~> 1.0.3)
+      sass-rails
+      unicode
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -67,15 +64,19 @@ GEM
     combustion (0.3.1)
       rails (>= 3.1.0)
       thor (>= 0.14.6)
-    compass (0.12.alpha.2)
+    compass (0.12.1)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    compass-rails (1.0.1)
+      compass (~> 0.12.0)
+    compass-susy-plugin (0.9)
+      compass (>= 0.11.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     fakeweb (1.3.0)
     ffi (1.0.11)
-    fssm (0.2.7)
+    fssm (0.2.9)
     hike (1.2.1)
     i18n (0.6.0)
     json (1.6.3)
@@ -88,7 +89,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    marc (0.4.3)
+    marc (0.4.4)
     mime-types (1.17.2)
     multi_json (1.0.4)
     nokogiri (1.5.0)
@@ -120,7 +121,7 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
-    rsolr (1.0.6)
+    rsolr (1.0.8)
       builder (>= 2.1.2)
     rsolr-ext (1.0.3)
       rsolr (>= 1.0.2)
@@ -138,11 +139,11 @@ GEM
       railties (~> 3.0)
       rspec (~> 2.7.0)
     rubyzip (0.9.4)
-    sass (3.1.12)
-    sass-rails (3.1.5)
+    sass (3.1.16)
+    sass-rails (3.1.6)
       actionpack (~> 3.1.0)
       railties (~> 3.1.0)
-      sass (~> 3.1.10)
+      sass (>= 3.1.10)
       tilt (~> 1.3.2)
     selenium-webdriver (2.13.0)
       childprocess (>= 0.2.1)
@@ -160,7 +161,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.31)
-    unicode (0.4.0)
+    unicode (0.4.2)
     vcr (1.11.3)
     xpath (0.1.4)
       nokogiri (~> 1.3)
@@ -169,7 +170,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight!
   blacklight_highlight!
   capybara
   combustion
